@@ -1,5 +1,7 @@
 package com.crud.tasks.mapper;
 
+import com.crud.tasks.domain.AttachementByType;
+import com.crud.tasks.domain.Trello;
 import com.crud.tasks.domain.TrelloListDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -26,6 +28,22 @@ public class CreatedTrelloCard {
 
     @JsonProperty("badges")
     private String badges;
+
+    @JsonProperty("votes")
+    private int votes;
+
+    @JsonProperty("attachements")
+    private AttachementByType attachements;
+
+    @JsonProperty("trello")
+    private Trello trello;
+
+    @JsonProperty("board")
+    private int board;
+    @JsonProperty("card")
+    private int card;
+
+
 
 
 }
