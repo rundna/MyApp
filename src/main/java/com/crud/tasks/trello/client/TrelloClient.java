@@ -30,6 +30,9 @@ public class TrelloClient {
     @Value("${trello.api.user}")
     private String trelloUser;
 
+    @Value("${trello.app.card}")
+    private String trelloCardId;
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -62,9 +65,9 @@ public class TrelloClient {
      }
     public CreatedTrelloCard getBadge() {
 
-        URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/cards")
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "cards/")
                 .queryParam("key", trelloAppKey)
-                .queryParam("id","5ac9bda29b8769720ead8e16")
+                .queryParam("id",trelloCardId)
                 .queryParam("token", trelloToken)
                 .queryParam("fields","name,badges").build().encode().toUri();
         return restTemplate.getForObject(url, CreatedTrelloCard.class);
