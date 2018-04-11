@@ -105,9 +105,9 @@ public class TrelloClientTest {
 
         try {
             TrelloBoardDto[] noBoardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);
-            //System.out.println(noBoardsResponse);
-            Arrays.asList(Optional.ofNullable(noBoardsResponse).orElse(new TrelloBoardDto[0]));
-            assertEquals(null,noBoardsResponse);
+            List<TrelloBoardDto> result = Arrays.asList(Optional.ofNullable(noBoardsResponse).orElse(new TrelloBoardDto[0]));
+            //System.out.println(result);
+            assertEquals(0,result.size());
         } catch (RestClientException e) {
             LOGGER.error(e.getMessage(), e);
         }
