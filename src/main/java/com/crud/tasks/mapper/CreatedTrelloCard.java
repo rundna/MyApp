@@ -26,22 +26,22 @@ public class CreatedTrelloCard {
     @JsonProperty("shortUrl")
     private String shortUrl;
 
-    @JsonProperty("badges")
-    private String badges;
+    //@JsonProperty("badges")
+    //private String badges;
 
-    @JsonProperty("votes")
-    private int votes;
+    //@JsonProperty("votes")
+    //private int votes;
 
-    @JsonProperty("attachements")
-    private AttachementByType attachements;
+    //@JsonProperty("attachements")
+    //private AttachementByType attachements;
 
-    @JsonProperty("trello")
-    private Trello trello;
+    //@JsonProperty("trello")
+    //private Trello trello;
 
-    @JsonProperty("board")
-    private int board;
-    @JsonProperty("card")
-    private int card;
+    //@JsonProperty("board")
+    //private int board;
+    //@JsonProperty("card")
+    //private int card;
 
 
 

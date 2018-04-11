@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Getter
@@ -23,7 +24,7 @@ public class TrelloBoardDto {
     @JsonProperty("lists")
     private List<TrelloListDto> lists;
 
-    @JsonProperty("badges")
-    private Badges badges;
+    //@JsonProperty("badges")
+    //private Badges badges;
 
 }
