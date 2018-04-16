@@ -27,7 +27,7 @@ import static org.springframework.data.mapping.Alias.ofNullable;
 public class TrelloClient {
 
     @Autowired
-    private TrelloConfig trelloConfig;
+    public TrelloConfig trelloConfig;
 
     private static final Logger LOGGER= LoggerFactory.getLogger(TrelloClient.class);
 

@@ -79,13 +79,13 @@ public class TrelloClientTest {
                 "1",
                 "Test task",
                 "http://test.com"
-               // "badges",
-               // 1,
-               // new AttachementByType(),
-               // new Trello(),
-               // 0,
-               // 0
-                );
+                // "badges",
+                // 1,
+                // new AttachementByType(),
+                // new Trello(),
+                // 0,
+                // 0
+        );
 
         when(restTemplate.postForObject(uri,null,CreatedTrelloCard.class)).thenReturn(createdTrelloCard);
 
@@ -96,7 +96,7 @@ public class TrelloClientTest {
 
     @Test
     public void shouldReturnEmptyList() throws URISyntaxException{
-    //Given
+        //Given
         when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
         when(trelloConfig.getTrelloAppKey()).thenReturn("test");
         when(trelloConfig.getTrelloToken()).thenReturn("test");
