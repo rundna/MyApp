@@ -28,9 +28,10 @@ public class CoreConfiguration implements WebMvcConfigurer{
     @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("controller")
                 .select()
                 .apis(RequestHandlerSelectors.any())
-                .paths(regex("/controller.*"))
+                .paths(PathSelectors.any())
                 .build();
     }
 
