@@ -2,6 +2,7 @@ package com.crud.tasks.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -18,6 +19,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 
 @EnableSwagger2
 @Configuration
+@EnableScheduling
 public class CoreConfiguration implements WebMvcConfigurer{
 
     @Bean
@@ -31,7 +33,8 @@ public class CoreConfiguration implements WebMvcConfigurer{
                 .groupName("controller")
                 .select()
                 .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.ant("com.crud.tasks.controller/*"))
+                .paths(PathSelectors.any())
+                //.paths(PathSelectors.ant("com.crud.tasks.controller/*"))
                 .build();
     }
 
