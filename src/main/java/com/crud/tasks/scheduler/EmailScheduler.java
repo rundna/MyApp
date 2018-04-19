@@ -19,17 +19,18 @@ public class EmailScheduler {
     private AdminConfig adminConfig;
 
     private static final String SUBJECT = "Tasks: Once a day email";
-    String endS = "";
+
 
     @Scheduled(cron = "0 0 10 * * *")
     public void sendInformationEmail(){
+        String taskWord = " task";
         long size = taskRepository.count();
-        if(size>1){
-            endS= "s";
+        if(size>1) {
+            taskWord = " tasks";
         }
         simpleEmailService.send(new Mail(adminConfig.getAdminMail(),
                 SUBJECT,
-                "Currently in database you got: " + size + "task"+endS,""));
+                "Currently in database you got: " + size + taskWord,""));
     }
 
 
