@@ -22,4 +22,7 @@ public class TrelloConfig {
 
     @Value("${trello.app.card}")
     private String trelloCardId;
+
+    @Value("${trello.app.board}")
+    private String trelloBoardId;
 }

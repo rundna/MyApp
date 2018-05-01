@@ -1,7 +1,7 @@
 package com.crud.tasks.trello.client;
 
 import com.crud.tasks.domain.*;
-import com.crud.tasks.mapper.CreatedTrelloCard;
+import com.crud.tasks.mapper.CreatedTrelloCardDto;
 import com.crud.tasks.trello.config.TrelloConfig;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,30 +67,23 @@ public class TrelloClientTest {
         assertEquals("test_board", fetchedTrelloBoards.get(0).getName());
         assertEquals(new ArrayList<>(),fetchedTrelloBoards.get(0).getLists());
     }
-
+    @Test
     public void shouldCreateCard() throws URISyntaxException{
-        TrelloCardDto trelloCardDto = new TrelloCardDto("Test Task", "Test description", "top", "test_id"); //, new Badges());
+        TrelloCardDto trelloCardDto = new TrelloCardDto("Test Task", "Test description", "top", "test_id");
 
-        CreatedTrelloCard newCard = trelloClient.createNewCard(trelloCardDto);
+        URI uri = new URI("http://test.com/cards?key=test&token=test&name=Test%20Task&desc=Test%20description&pos=top&idList=test_id");
 
-        URI uri = new URI("http://test.com/cards?key=test&token=test&name=Test%20task&desc=Test%20Description&pos=top&idList=test_id");
-
-        CreatedTrelloCard createdTrelloCard = new CreatedTrelloCard(
+        CreatedTrelloCardDto createdTrelloCardDto = new CreatedTrelloCardDto(
                 "1",
                 "Test task",
-                "http://test.com"
-                // "badges",
-                // 1,
-                // new AttachementByType(),
-                // new Trello(),
-                // 0,
-                // 0
+                "http://test.com",
+                new Badges()
         );
+        when(restTemplate.postForObject(uri,null,CreatedTrelloCardDto.class)).thenReturn(createdTrelloCardDto);
+        CreatedTrelloCardDto newCard = trelloClient.createNewCard(trelloCardDto);
 
-        when(restTemplate.postForObject(uri,null,CreatedTrelloCard.class)).thenReturn(createdTrelloCard);
-
-        assertEquals(1,newCard.getId());
-        assertEquals("Test Task", newCard.getName());
+        assertEquals("1", newCard.getId());
+        assertEquals("Test task", newCard.getName());
         assertEquals("http://test.com", newCard.getShortUrl());
     }
 

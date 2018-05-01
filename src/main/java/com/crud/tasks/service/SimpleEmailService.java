@@ -36,7 +36,11 @@ public class SimpleEmailService {
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
-        ofNullable(mailMessage).ifPresent(noCc->noCc.setCc(mail.getToCC()));
+//        if(mail.getToCC()!=null){
+//            mailMessage.setCc(mail.getToCC());
+//        }
+        //ofNullable(mailMessage).ifPresent(noCc->noCc.setCc(mail.getToCC()));
+        ofNullable(mail.getToCC()).ifPresent(mailMessage::setCc);
         return mailMessage;
     }
 }
