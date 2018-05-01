@@ -1,6 +1,7 @@
 package com.crud.tasks.facade;
 
 import com.crud.tasks.domain.*;
+import com.crud.tasks.mapper.CreatedTrelloCardDto;
 import com.crud.tasks.mapper.TrelloMapper;
 import com.crud.tasks.trello.client.TrelloClient;
 import com.crud.tasks.trello.config.TrelloConfig;
@@ -77,7 +78,28 @@ public class TrelloFacadeTestSuite {
         List<TrelloList> list = trelloMapper.mapToList(listDto);
         //Then
         assertEquals(1,board.size());
-        assertEquals(1,list.size());
+        assertEquals(new ArrayList<>(),list);
+    }
+    @Test
+    public void testCardMapper() throws URISyntaxException{
+        TrelloCardDto trelloCardDto = new TrelloCardDto("Test Task", "Test description", "top", "test_id");
 
+        URI uri = new URI("http://test.com/cards?key=test&token=test&name=Test%20Task&desc=Test%20description&pos=top&idList=test_id");
+
+        CreatedTrelloCardDto createdTrelloCardDto = new CreatedTrelloCardDto(
+                "1",
+                trelloCardDto.getName(),
+                "http://test.com",
+                new Badges()
+        );
+        when(restTemplate.postForObject(uri,null,CreatedTrelloCardDto.class)).thenReturn(createdTrelloCardDto);
+        CreatedTrelloCardDto newCard = trelloFacade.createCard(trelloCardDto);
+
+        TrelloCard card = trelloMapper.mapToCard(trelloCardDto);
+        assertEquals("test_id", card.getListId());
+        assertEquals("Test Task", card.getName());
+        assertEquals("Test Description", card.getDescription());
+        assertEquals("1",newCard.getId());
+        assertEquals("Test Task",newCard.getName());
     }
 }
