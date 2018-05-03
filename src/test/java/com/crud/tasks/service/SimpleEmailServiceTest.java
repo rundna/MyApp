@@ -37,7 +37,7 @@ public class SimpleEmailServiceTest {
         mailMassage.setText(mail.getMessage());
 
         simpleEmailService.send(mail);
-        emailScheduler.sendInformationEmail();
+        //emailScheduler.sendInformationEmail();
 
         verify(javaMailSender,times(1)).send(mailMassage);
     }

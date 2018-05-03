@@ -53,9 +53,9 @@ public class TrelloClientTest2 {
         List<TrelloBoardDto> fetchedTrelloBoards = trelloService.fetchTrelloBoards();
 
         //Then
-        assertEquals(1, fetchedTrelloBoards.size());
-        assertEquals("test_id", fetchedTrelloBoards.get(0).getId());
-        assertEquals("test_board", fetchedTrelloBoards.get(0).getName());
+        assertEquals(3, fetchedTrelloBoards.size());
+        assertEquals(trelloConfig.getTrelloBoardId(), fetchedTrelloBoards.get(0).getId());
+        assertEquals("Kodilla Application", fetchedTrelloBoards.get(0).getName());
         assertEquals(new ArrayList<>(), fetchedTrelloBoards.get(0).getLists());
     }
 

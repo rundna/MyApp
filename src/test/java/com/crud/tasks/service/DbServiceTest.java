@@ -1,6 +1,8 @@
 package com.crud.tasks.service;
 
 import com.crud.tasks.domain.Task;
+import com.crud.tasks.domain.TaskDto;
+import com.crud.tasks.mapper.TaskMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,23 +24,32 @@ public class DbServiceTest {
 
     @Autowired
     private DbService dbService;
+    @Autowired
+    private TaskMapper taskMapper;
 //    @InjectMocks
 //    private RestTemplate restTemplate;
 
     @Test
     public void testDbServiceMethods(){
-        Task task = new Task();
-        task.setId(3l);
-        task.setTitle("db service task");
-        task.setContent("test content");
-        dbService.saveTask(task);
 
+        TaskDto taskDto = new TaskDto();
+        //taskDto.setId(3l);
+        taskDto.setTitle("db service task");
+        taskDto.setContent("test content");
+        Task task = dbService.saveTask(taskMapper.mapToTask(taskDto));
+        dbService.saveTask(taskMapper.mapToTask(taskDto));
+
+
+        Optional taskItem = dbService.getTask(task.getId().longValue());
+        Task taskItem2 = (Task) taskItem.orElse(taskDto);
+        dbService.delete(taskItem2.getId());
         List<Task> taskList = dbService.getAllTasks();
-        Optional taskId = dbService.getTask(task.getId());
 
-        dbService.delete(task.getId());
+        dbService.getAllTasks().forEach(taskId->dbService.delete(taskId.getId()));
 
         assertEquals(1, taskList.size());
+
+
 
     }
 

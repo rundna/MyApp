@@ -28,8 +28,6 @@ public class TrelloServiceTest {
     @Mock
     TrelloService trelloService;
     @Mock
-    TrelloClient trelloClient;
-    @Mock
     TrelloConfig trelloConfig;
     @Mock
     RestTemplate restTemplate;
@@ -42,7 +40,7 @@ public class TrelloServiceTest {
         when(trelloConfig.getTrelloAppKey()).thenReturn("test");
         when(trelloConfig.getTrelloToken()).thenReturn("test");
         when(trelloConfig.getTrelloBoardId()).thenReturn("1");
-        when(trelloConfig.getTrelloCardId()).thenReturn("2");
+        //when(trelloConfig.getTrelloCardId()).thenReturn("2");
         when(trelloConfig.getTrelloUser()).thenReturn("test_user");
     }
 
@@ -59,7 +57,7 @@ public class TrelloServiceTest {
                 .queryParam("fields","name,id")
                 .queryParam("lists","all").build().encode().toUri();
 
-        when(restTemplate.getForObject(uri,TrelloBoardDto[].class)).thenReturn(trelloBoards);
+        //when(restTemplate.getForObject(uri,TrelloBoardDto[].class)).thenReturn(trelloBoards);
         URI url = new URI("http://test.com/members/test_user/boards/?key=test&token=test&id=1&fields=name,id&lists=all");
 
         List<TrelloBoardDto> board = trelloService.fetchTrelloBoards();
