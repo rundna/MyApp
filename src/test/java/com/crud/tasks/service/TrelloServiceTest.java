@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TrelloServiceTest {
-    @Mock
+    @InjectMocks
     TrelloService trelloService;
     @Mock
     TrelloConfig trelloConfig;
@@ -57,14 +57,14 @@ public class TrelloServiceTest {
                 .queryParam("fields","name,id")
                 .queryParam("lists","all").build().encode().toUri();
 
-        //when(restTemplate.getForObject(uri,TrelloBoardDto[].class)).thenReturn(trelloBoards);
+        when(restTemplate.getForObject(uri,TrelloBoardDto[].class)).thenReturn(trelloBoards);
         URI url = new URI("http://test.com/members/test_user/boards/?key=test&token=test&id=1&fields=name,id&lists=all");
 
         List<TrelloBoardDto> board = trelloService.fetchTrelloBoards();
         //String result = trelloConfig.getTrelloApiEndpoint() +" " + trelloConfig.getTrelloBoardId();
         //trelloController.getTrelloBoards();
 
-        //System.out.println(result);
+        System.out.println(trelloBoards);
         System.out.println(board.size());
 
         System.out.println(uri);
