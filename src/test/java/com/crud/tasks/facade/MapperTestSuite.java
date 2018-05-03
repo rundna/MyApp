@@ -42,9 +42,6 @@ public class MapperTestSuite {
     @InjectMocks
     private TrelloMapper trelloMapper;
 
-
-    private static final Logger LOGGER= LoggerFactory.getLogger(TrelloClient.class);
-
     @Test
     public void testTrelloMapping() {
 
