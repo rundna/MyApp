@@ -28,15 +28,22 @@ public class MapperTestSuite {
         List<TrelloBoardDto> trelloBoardsDto = new ArrayList<>();
         trelloBoardsDto.add(new TrelloBoardDto("1", "my_task", trelloListsDto));
 
-        TrelloCardDto trelloCardDto = new TrelloCardDto("card test","card desc","top","test_id");
+        TrelloCardDto trelloCardDto = new TrelloCardDto("card test","card desc","top","test_id", new Badges());
 
         List<TrelloList> trelloList = trelloMapper.mapToList(trelloListsDto);
         List<TrelloBoard> trelloBoard = trelloMapper.mapToBoards(trelloBoardsDto);
         TrelloCard trelloCard = trelloMapper.mapToCard(trelloCardDto);
 
+        List<TrelloListDto> trelloListDto2 = trelloMapper.mapToListDto(trelloList);
+        List<TrelloBoardDto> trelloBoardDto2 = trelloMapper.mapToBoardsDto(trelloBoard);
+        TrelloCardDto trelloCardDto2 = trelloMapper.mapToCardDto(trelloCard);
+
         assertEquals("1", trelloList.get(0).getId());
         assertEquals("my_task", trelloBoard.get(0).getName());
         assertEquals("card desc", trelloCard.getDescription());
+        assertEquals("1", trelloListDto2.get(0).getId());
+        assertEquals("my_task", trelloBoardDto2.get(0).getName());
+        assertEquals("card desc", trelloCardDto2.getDescription());
 
     }
     @Test
