@@ -40,29 +40,10 @@ public class MapperTestSuite {
     private TaskMapper taskMapper;
 
     @InjectMocks
-    private TrelloClient trelloClient;
-    @Mock
-    private RestTemplate restTemplate;
-    @Mock
-    private TrelloConfig trelloConfig;
-    @Mock
-    private TrelloValidator trelloValidator;
-    @InjectMocks
     private TrelloMapper trelloMapper;
-    @Mock
-    private TrelloFacade trelloFacade;
-    @Mock
-    private TrelloService trelloService;
+
 
     private static final Logger LOGGER= LoggerFactory.getLogger(TrelloClient.class);
-
-    @Before
-    public void init() {
-        when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
-        when(trelloConfig.getTrelloAppKey()).thenReturn("test");
-        when(trelloConfig.getTrelloToken()).thenReturn("test");
-        when(trelloConfig.getTrelloUser()).thenReturn("kkg7");
-    }
 
     @Test
     public void testTrelloMapping() {
