@@ -9,31 +9,25 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 public class EmailScheduler {
 
+    private static final String SUBJECT = "Tasks: Once a day email";
     @Autowired
     private SimpleEmailService simpleEmailService;
-
     @Autowired
     private TaskRepository taskRepository;
-
     @Autowired
     private AdminConfig adminConfig;
 
-
-    private static final String SUBJECT = "Tasks: Once a day email";
-
-
     @Scheduled(fixedDelay = 10000) //cron = "0 0 10 * * *")
-    public void sendInformationEmail(){
+    public void sendInformationEmail() {
         String taskWord = " task";
         long size = taskRepository.count();
-        if(size>1) {
+        if (size > 1) {
             taskWord = " tasks";
         }
         simpleEmailService.send(new Mail(adminConfig.getAdminMail(),
                 SUBJECT,
-                "Currently in database you got: " + size + taskWord,""));
+                "Currently in database you got: " + size + taskWord, ""));
     }
-
 
 
 }

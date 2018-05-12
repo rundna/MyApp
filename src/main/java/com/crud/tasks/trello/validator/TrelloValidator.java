@@ -14,19 +14,20 @@ import static java.util.stream.Collectors.toList;
 public class TrelloValidator {
     private static final Logger LOGGER = LoggerFactory.getLogger(TrelloValidator.class);
 
-    public void validateCard(final TrelloCard trelloCard){
-        if(trelloCard.getName().contains("test")){
+    public void validateCard(final TrelloCard trelloCard) {
+        if (trelloCard.getName().contains("test")) {
             LOGGER.info("Someone is testing");
-        }else{
+        } else {
             LOGGER.info("Seems that my app is used in proper way!");
         }
     }
-    public List<TrelloBoard> validateTrelloBoards(final List<TrelloBoard> trelloBoards){
+
+    public List<TrelloBoard> validateTrelloBoards(final List<TrelloBoard> trelloBoards) {
         LOGGER.info("Starting filtering boards...");
         List<TrelloBoard> filteredBoards = trelloBoards.stream()
-                .filter(trelloBoard->!trelloBoard.getName().equalsIgnoreCase("test"))
+                .filter(trelloBoard -> !trelloBoard.getName().equalsIgnoreCase("test"))
                 .collect(toList());
         LOGGER.info("Board filtered. Current size: " + filteredBoards.size());
-    return filteredBoards;
+        return filteredBoards;
     }
 }

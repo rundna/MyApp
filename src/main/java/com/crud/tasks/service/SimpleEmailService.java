@@ -9,8 +9,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 import static java.util.Optional.ofNullable;
 
 @Service
@@ -27,11 +25,11 @@ public class SimpleEmailService {
             javaMailSender.send(createMailMessage(mail));
             LOGGER.info("Email sent.");
         } catch (MailException e) {
-            LOGGER.error("Failed to send: ",e.getMessage(),e);
+            LOGGER.error("Failed to send: ", e.getMessage(), e);
         }
     }
 
-    private SimpleMailMessage createMailMessage(final Mail mail){
+    private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());

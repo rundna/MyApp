@@ -1,12 +1,13 @@
 body {
-   background-color: grey;
+    background-color: grey;
 }
 
 h1 {
-   text-align: center;
-   color: red;
-   font-size: 4em;
+    text-align: center;
+    color: red;
+    font-size: 4em;
 }
-p{
-   font-size: 2em;
+
+p {
+    font-size: 2em;
 }

@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -43,33 +43,31 @@ public class TrelloClientTest {
         when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
         when(trelloConfig.getTrelloAppKey()).thenReturn("test");
         when(trelloConfig.getTrelloToken()).thenReturn("test");
+        when(trelloConfig.getTrelloUser()).thenReturn("kkg7");
     }
 
     @Test
     public void shouldFetchTrelloBoards() throws URISyntaxException{
-        //Given
-        when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
-        when(trelloConfig.getTrelloAppKey()).thenReturn("test");
-        when(trelloConfig.getTrelloToken()).thenReturn("test");
-
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
-        trelloBoards[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>()); //, new ArrayList<>(), new Badges());
+        trelloBoards[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>());
 
         URI uri = new URI("http://test.com/members/kkg7/boards?key=test&token=test&fields=name,id&lists=all");
-        when(restTemplate.getForObject(uri,TrelloBoardDto[].class)).thenReturn(trelloBoards);
 
+        when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(trelloBoards);
+       // System.out.println(restTemplate.getForObject(uri, TrelloBoardDto[].class).toString());
+        System.out.println(trelloClient.getTrelloBoards());
         //When
         List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
 
         //Then
-        assertEquals(0,fetchedTrelloBoards.size());
+        assertEquals(1, fetchedTrelloBoards.size());
         assertEquals("test_id", fetchedTrelloBoards.get(0).getId());
         assertEquals("test_board", fetchedTrelloBoards.get(0).getName());
-        assertEquals(new ArrayList<>(),fetchedTrelloBoards.get(0).getLists());
+        assertEquals(new ArrayList<>(), fetchedTrelloBoards.get(0).getLists());
     }
     @Test
     public void shouldCreateCard() throws URISyntaxException{
-        Badges  badges = new Badges();
+        Badges badges = new Badges();
         Trello trello = new Trello();
         trello.setBoard(3);
         trello.setCard(4);
@@ -99,9 +97,6 @@ public class TrelloClientTest {
     @Test
     public void shouldReturnEmptyList() throws URISyntaxException{
         //Given
-        when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
-        when(trelloConfig.getTrelloAppKey()).thenReturn("test");
-        when(trelloConfig.getTrelloToken()).thenReturn("test");
 
         URI url = new URI("http://test.com/members/kkg7/boards?key=test&token=test&fields=name,id&lists=all");
 

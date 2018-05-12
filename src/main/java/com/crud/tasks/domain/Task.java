@@ -9,7 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity(name="tasks")
+@Entity(name = "tasks")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,10 +21,10 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String title;
 
-    @Column(name="description")
+    @Column(name = "description")
     private String content;
 
 }

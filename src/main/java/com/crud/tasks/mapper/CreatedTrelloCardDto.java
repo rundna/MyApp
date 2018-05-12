@@ -1,16 +1,11 @@
 package com.crud.tasks.mapper;
 
-import com.crud.tasks.domain.AttachementByType;
 import com.crud.tasks.domain.Badges;
-import com.crud.tasks.domain.Trello;
-import com.crud.tasks.domain.TrelloListDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @AllArgsConstructor
 @Getter
@@ -29,8 +24,6 @@ public class CreatedTrelloCardDto {
 
     @JsonProperty("badges")
     private Badges badges;
-
-
 
 
 }
