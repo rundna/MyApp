@@ -11,8 +11,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
-import static java.util.Optional.ofNullable;
-
 @Service
 public class SimpleEmailService {
 
@@ -34,6 +32,16 @@ public class SimpleEmailService {
         }
     }
 
+    public void sendTasksListEmail(final Mail mail) {
+        LOGGER.info("Starting mail process...");
+        try {
+            javaMailSender.send(createMimeMessageWithTasksList(mail));
+            LOGGER.info("Email sent.");
+        } catch (MailException e) {
+            LOGGER.error("Failed to send: ", e.getMessage(), e);
+        }
+    }
+
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
@@ -47,12 +55,22 @@ public class SimpleEmailService {
         return mailMessage;
     }
 
+
     private MimeMessagePreparator createMimeMessage(final Mail mail) {
         return mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
             messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+        };
+    }
+
+    private MimeMessagePreparator createMimeMessageWithTasksList(final Mail mail) {
+        return mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            messageHelper.setTo(mail.getMailTo());
+            messageHelper.setSubject(mail.getSubject());
+            messageHelper.setText(mailCreatorService.sendTasksListEmail(mail.getMessage()), true);
         };
     }
 

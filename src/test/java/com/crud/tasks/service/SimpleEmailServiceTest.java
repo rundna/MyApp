@@ -43,4 +43,5 @@ public class SimpleEmailServiceTest {
         verify(javaMailSender,times(1)).send(mailMassage);
     }
 
+
 }
