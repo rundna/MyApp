@@ -53,7 +53,7 @@ public class TaskControllerTest {
             when(taskMapper.mapToTaskDtoList(taskList)).thenReturn(taskListDto);
             when(service.getAllTasks()).thenReturn(taskList);
 
-            mockMvc.perform(get("/v1/task/getTasks").contentType(MediaType.APPLICATION_JSON)
+            mockMvc.perform(get("/v1/tasks").contentType(MediaType.APPLICATION_JSON)
                     .characterEncoding("UTF-8")
                     .content(jsonContent))
                     .andExpect(status().isOk())
@@ -71,7 +71,7 @@ public class TaskControllerTest {
         when(service.getTask(1L)).thenReturn(Optional.of(new Task()));
 
         //When & Then
-        mockMvc.perform(get("/v1/task/getTask/").contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(get("/v1/tasks/").contentType(MediaType.APPLICATION_JSON)
                 .param("taskId","1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id",is(1)))
@@ -87,7 +87,7 @@ public class TaskControllerTest {
 
        // when(service.saveTask(task)).thenReturn(task);
 
-        mockMvc.perform(post("/v1/task/createTask").contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(post("/v1/tasks").contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().isOk());
@@ -103,7 +103,7 @@ public class TaskControllerTest {
 
         when(service.saveTask(any())).thenReturn(task);
 
-        mockMvc.perform(put("/v1/task/updateTask").contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(put("/v1/tasks").contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().isOk())
@@ -123,7 +123,7 @@ public class TaskControllerTest {
 
         service.delete(task.getId());
 
-        this.mockMvc.perform(delete("/v1/task/deleteTask").contentType(MediaType.APPLICATION_JSON)
+        this.mockMvc.perform(delete("/v1/tasks").contentType(MediaType.APPLICATION_JSON)
                 .param("taskId","3")
                 .characterEncoding("UTF-8")
                 .content(jsonContent))

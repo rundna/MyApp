@@ -1,6 +1,5 @@
 package com.crud.tasks.service;
 
-import com.crud.tasks.domain.Mail;
 import com.crud.tasks.scheduler.EmailScheduler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,11 +23,12 @@ public class SimpleEmailServiceTest2 {
 
     @Test
     public void shouldSendEmailWithTasksList(){
-        //SimpleEmailService simpleEmailService = new SimpleEmailService();
-        //EmailScheduler emailScheduler = new EmailScheduler();
-        Mail mail = emailScheduler.sendInformationEmail();
-
-        simpleEmailService.sendTasksListEmail(mail);
+        SimpleEmailService simpleEmailService = new SimpleEmailService();
+        EmailScheduler emailScheduler = new EmailScheduler();
+       // Mail mail = emailScheduler.sendInformationEmail();
+        emailScheduler.sendInformationEmail();
+        //simpleEmailService.sendTasksListEmail();
+        //javaMailSender.send((MimeMessagePreparator) mail);
 
     }
 

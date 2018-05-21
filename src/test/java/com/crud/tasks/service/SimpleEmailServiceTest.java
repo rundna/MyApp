@@ -30,13 +30,13 @@ public class SimpleEmailServiceTest {
     @Test
     public void shouldSendEmail(){
         AdminConfig adminConfig = new AdminConfig();
-        Mail mail = new Mail(adminConfig.getAdminMail(),"Test","Some message!",null);
+        Mail mail = new Mail("kodijava8@gmail.com","Test","Some message!",null);
 
         SimpleMailMessage mailMassage = new SimpleMailMessage();
         mailMassage.setTo(mail.getMailTo());
         mailMassage.setSubject(mail.getSubject());
         mailMassage.setText(mail.getMessage());
-
+        javaMailSender.send(mailMassage);
         simpleEmailService.send(mail);
         //emailScheduler.sendInformationEmail();
 
