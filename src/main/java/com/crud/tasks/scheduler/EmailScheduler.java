@@ -19,7 +19,7 @@ public class EmailScheduler {
     @Autowired
     private AdminConfig adminConfig;
 
-    @Scheduled(fixedDelay = 1000) //cron = "0 0 10 * * *")
+    @Scheduled(fixedDelay = 10000) //cron = "0 0 10 * * *")
     public void sendInformationEmail() {
         String taskWord = " task";
         long size = taskRepository.count();
@@ -30,7 +30,7 @@ public class EmailScheduler {
                 SUBJECT,
                 "Currently in database you got: " + size + taskWord, "");
 
-        simpleEmailService.send(tasksListMail);
+        //simpleEmailService.send(tasksListMail);
         //return tasksListMail;
     }
 
